@@ -15,7 +15,6 @@ class Album extends Component {
       isPlaying: false
     };
 
-    var audioElement = null;
     this.audioElement = document.createElement("audio");
     this.audioElement.src = album.songs[0].audioSrc;
   }
