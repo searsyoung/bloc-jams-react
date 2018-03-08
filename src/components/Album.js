@@ -30,9 +30,10 @@ class Album extends Component {
   }
 
   setSong(song) {
+    //    console.log("setSong(song)=", song);
+    //    console.log("audioSrc", song.audioSrc);
     this.audioElement.src = song.audioSrc;
     this.setState({ currentSong: song });
-    console.log(this.audioElement.src);
   }
 
   handleSongClick(song) {
@@ -61,9 +62,14 @@ class Album extends Component {
     const currentIndex = this.state.album.songs.findIndex(
       song => this.state.currentSong === song
     );
-    console.log(currentIndex.length);
-    const newIndex = Math.max(0, currentIndex + 1);
+    //console.log(this.state.album.songs.length);
+    const newIndex = Math.min(
+      this.state.album.songs.length - 1,
+      currentIndex + 1
+    );
+    //console.log("newIndex=", newIndex);
     const newSong = this.state.album.songs[newIndex];
+    //console.log("newSong=", newSong);
     this.setSong(newSong);
     this.play(newSong);
   }
