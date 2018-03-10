@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../styles/playerbar.css";
 
 class PlayerBar extends Component {
   render() {
@@ -15,32 +16,32 @@ class PlayerBar extends Component {
             <span className="ion-skip-forward" />
           </button>
         </section>
-        <section id="time-control">
-          <div className="current-time">{this.props.formatTime()}</div>
-          <input
-            type="range"
-            className="seek-bar"
-            value={this.props.currentTime / this.props.duration || 0}
-            max="1"
-            min="0"
-            step="0.01"
-            onChange={this.props.handleTimeChange}
-          />
+        <div className="current-time">{this.props.formatTime()}</div>
+        <div id="audio-container">
+          <div id="time-control">
+            <input
+              type="range"
+              className="seek-bar seek-bar-time"
+              value={this.props.currentTime / this.props.duration || 0}
+              max="1"
+              min="0"
+              step="0.01"
+              onChange={this.props.handleTimeChange}
+            />
+          </div>
+          <div id="volume-control">
+            <input
+              type="range"
+              className="seek-bar seek-bar-vol"
+              value={this.props.currentVolume || 0.05}
+              max="1"
+              min="0"
+              step="0.01"
+              onChange={this.props.handleVolumeChange}
+            />
+          </div>
           <div className="total-time">{this.props.duration}</div>
-        </section>
-        <section id="volume-control">
-          <div className="icon ion-volume-low" />
-          <input
-            type="range"
-            className="seek-bar"
-            value={this.props.currentVolume || 0.05}
-            max="1"
-            min="0"
-            step="0.01"
-            onChange={this.props.handleVolumeChange}
-          />
-          <div className="icon ion-volume-high" />
-        </section>
+        </div>
       </section>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import albumData from "./../data/albums";
 import PlayerBar from "./PlayerBar";
+import "../styles/album.css";
+import "../styles/styles.css";
 
 class Album extends Component {
   constructor(props) {
@@ -16,7 +18,8 @@ class Album extends Component {
       currentTime: 0,
       duration: album.songs[0].duration,
       isPlaying: false,
-      currentVolume: 0.05
+      currentVolume: 0.05,
+      onHover: null
     };
     this.audioElement = document.createElement("audio");
     this.audioElement.src = album.songs[0].audioSrc;
@@ -57,7 +60,6 @@ class Album extends Component {
       "volumechange",
       this.eventListeners.volumechange
     );
-    console.log("mounted", this.audioElement.currentVolume);
   }
 
   componentWillUnmount() {
@@ -147,6 +149,45 @@ class Album extends Component {
       return "-:--";
     }
   }
+
+  toggleHidden(show, index) {
+    if (show) {
+      this.setState({
+        isHidden: !this.state.isHidden,
+        hoverIndex: index + 1
+      });
+    }
+    console.log(index);
+    this.setState({
+      isHidden: !this.state.isHidden,
+      hoverIndex: null
+    });
+  }
+
+  whenOver(index) {
+    this.setState({
+      onHover: index + 1
+    });
+  }
+
+  whenOut() {
+    this.setState({
+      onHover: false
+    });
+  }
+  formatSongDuration(time) {
+    if (typeof parseFloat(time) === "number") {
+      var minutes = Math.floor(time / 60);
+      var seconds = Math.ceil(time - minutes * 60);
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      return minutes + ":" + seconds;
+    } else {
+      return "-:--";
+    }
+  }
+
   render() {
     return (
       <section className="album">
@@ -155,6 +196,7 @@ class Album extends Component {
             id="album-cover-art"
             src={this.state.album.albumCover}
             alt={`${this.state.album.title} Album Cover`}
+            width="75px"
           />
           <div className="album-details">
             <h1 id="album-title">{this.state.album.title}</h1>
@@ -162,7 +204,11 @@ class Album extends Component {
             <div id="release-info">{this.state.album.releaseInfo}</div>
           </div>
         </section>
-        <table id="song-list">
+        <i className="fas fa-camera-retro" />
+        <table
+          id="song-list"
+          className="table table-striped table-bordered table-hover rounded"
+        >
           <colgroup>
             <col id="song-number-column" />
             <col id="song-title-column" />
@@ -171,17 +217,34 @@ class Album extends Component {
           <tbody>
             {this.state.album.songs.map((song, index) => (
               <tr
-                className="song"
+                className="song "
                 key={index}
+                onMouseOver={() => this.whenOver(index)}
+                onMouseOut={() => this.whenOut()}
                 onClick={() => this.handleSongClick(song)}
               >
-                <td className="song-number">{index + 1}</td>
-                <td className="song-title">{song.title}</td>
-                <td className="song-duration">{song.duration}</td>
+                <td className="song-number ">
+                  {this.state.currentSong.title === song.title ? (
+                    <span
+                      className={
+                        this.state.isPlaying ? "ion-pause" : "ion-play"
+                      }
+                    />
+                  ) : this.state.onHover === index + 1 ? (
+                    <span className="ion-play" />
+                  ) : (
+                    <span className="song-number">{index + 1}</span>
+                  )}
+                </td>
+                <td className="song-title ">{song.title}</td>
+                <td className="song-duration ">
+                  {this.formatSongDuration(song.duration)}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+
         <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
@@ -199,4 +262,5 @@ class Album extends Component {
     );
   }
 }
+
 export default Album;

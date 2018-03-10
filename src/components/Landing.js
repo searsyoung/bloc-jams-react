@@ -1,8 +1,17 @@
 import React from "react";
+import "../styles/styles.css";
+import { Link } from "react-router-dom";
 
 const Landing = () => (
-  <section className="library">
-    <h1 className="hero-title">Turn the music up!</h1>
+  <section className="landing">
+    <section className="hero2">
+      <h1>Turn the music up!</h1>
+      <h3>What will you listen to today?</h3>
+      <p />
+      <Link to="/library" className="btn">
+        Show me the music!
+      </Link>
+    </section>
 
     <section className="selling-points">
       <div className="point">
