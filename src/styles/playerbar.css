@@ -1,36 +1,127 @@
-input[type="range"] {
-  width: 210px;
-  height: 30px;
-  overflow: hidden;
-  cursor: pointer;
-  outline: none;
+.slidecontainer {
+  width: 100%;
 }
-input[type="range"],
-input[type="range"]::-webkit-slider-runnable-track,
-input[type="range"]::-webkit-slider-thumb {
+
+.slider {
   -webkit-appearance: none;
-}
-input[type="range"]::-webkit-slider-runnable-track {
-  width: 200px;
+  width: 70%;
   height: 10px;
-  background: #aaa;
-  border-radius: 25px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  margin-left: 12px;
 }
-input[type="range"]::-webkit-slider-thumb {
-  position: relative;
-  height: 30px;
-  width: 30px;
-  margin-top: -10px;
-  background: steelblue;
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  border: 2px solid white;
+  background: #4caf50;
+  cursor: pointer;
 }
-input[type="range"]::-webkit-slider-thumb::before {
-  position: absolute;
-  content: "";
-  height: 10px; /* equal to height of runnable track */
-  width: 500px; /* make this bigger than the widest range input element */
-  left: -502px; /* this should be -2px - width */
-  top: 8px; /* don't change this */
-  background: #777;
+.slider-vol {
+  background: #d3d3d3;
+}
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+}
+
+.ion-ios-timer,
+.ion-play,
+.ion-pause,
+.ion-skip-backward,
+.ion-skip-forward {
+  font-size: 20px;
+  padding: 0px 5px 0px 0px;
+}
+.ion-volume-high {
+  font-size: 20px;
+  padding-left: 5px;
+}
+
+.slider-time::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #1f1f1f;
+  cursor: pointer;
+}
+.slider-time::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #1f1f1f;
+  cursor: pointer;
+}
+
+.slider-time {
+  -webkit-appearance: none;
+  width: 70%;
+  height: 10px;
+  border-radius: 5px;
+  margin: 0px 5px 0px 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider-time:hover {
+  opacity: 1;
+}
+
+.circle {
+  display: inline-block;
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px #888;
+  padding: 0.5em 1.75em;
+}
+
+.media-button {
+  display: inline-block;
+
+  box-shadow: 0px 0px 2px #888;
+  border-radius: 5px;
+  padding: 0.5em 1.7em;
+}
+.media-button:hover,
+.circle:hover {
+  background-color: #ececec;
+}
+
+#buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  padding: 4px 0px 4px 0px;
+  background-color: #fff;
+
+  color: #444;
+}
+
+.player-bar {
+  padding: 0px 5px 0px 5px;
+}
+
+#buttons {
+  padding-bottom: 20px;
+}
+
+.margin-pad {
+  margin-top: 10px;
 }

@@ -1,0 +1,52 @@
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-item:hover {
+  background: rgb(230, 230, 230);
+}
+
+.flex-item {
+  margin-right: 10px;
+  padding: 5px;
+
+  text-align: center;
+
+  background: rgb(252, 248, 242);
+  border-radius: 15px;
+  margin: 0px 15px 15px 15px;
+  box-shadow: 1px 2px 3px;
+}
+
+.album-cover {
+  width: 250px;
+  height: auto;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccecf;
+  margin: 1em 0;
+  padding: 0;
+}
+.album-title {
+  color: black;
+}
+.album-title:hover {
+  color: black;
+  text-decoration: none !important;
+}
+
+.album-details:hover {
+  text-decoration: none;
+}

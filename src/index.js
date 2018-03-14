@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
+// Scroll the page to the top on Route change
+import ScrollToTop from "./components/ScrollToTop";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <ScrollToTop>
+      <App />
+    </ScrollToTop>
   </BrowserRouter>,
   document.getElementById("root")
 );

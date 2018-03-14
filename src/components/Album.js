@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import albumData from "./../data/albums";
 import PlayerBar from "./PlayerBar";
+import { Link } from "react-router-dom";
 import "../styles/album.css";
-import "../styles/styles.css";
 
 class Album extends Component {
   constructor(props) {
@@ -157,7 +157,7 @@ class Album extends Component {
         hoverIndex: index + 1
       });
     }
-    console.log(index);
+    //console.log(index);
     this.setState({
       isHidden: !this.state.isHidden,
       hoverIndex: null
@@ -190,74 +190,98 @@ class Album extends Component {
 
   render() {
     return (
-      <section className="album">
-        <section id="album-info">
-          <img
-            id="album-cover-art"
-            src={this.state.album.albumCover}
-            alt={`${this.state.album.title} Album Cover`}
-            width="75px"
-          />
-          <div className="album-details">
-            <h1 id="album-title">{this.state.album.title}</h1>
-            <h2 className="artist">{this.state.album.artist}</h2>
-            <div id="release-info">{this.state.album.releaseInfo}</div>
+      <section>
+        <header className="jumbotron">
+          <h1 className="display-4 ">Turn the music up!</h1>
+          <Link to="/" className="lead text-muted">
+            Bloc Jams
+          </Link>{" "}
+          >{" "}
+          <Link to="/Library" className="lead text-muted">
+            Library
+          </Link>{" "}
+          >{" "}
+          <Link
+            to={`/album/${this.state.album.slug}`}
+            className="lead artist-album-header"
+          >
+            {this.state.album.artist} {" : "} {this.state.album.title}
+          </Link>
+        </header>
+        <section className="album">
+          <div className="wrapper">
+            <div className="grid">
+              <div className="album-info">
+                <img
+                  id="album-cover-art"
+                  src={this.state.album.albumCover}
+                  alt={`${this.state.album.title} Album Cover`}
+                />
+                <div className="playerbar">
+                  <PlayerBar
+                    isPlaying={this.state.isPlaying}
+                    currentSong={this.state.currentSong}
+                    currentTime={this.audioElement.currentTime}
+                    duration={this.audioElement.duration}
+                    currentVolume={this.audioElement.currentVolume}
+                    handleSongClick={() =>
+                      this.handleSongClick(this.state.currentSong)
+                    }
+                    handlePrevClick={() => this.handlePrevClick()}
+                    handleNextClick={() => this.handleNextClick()}
+                    handleTimeChange={e => this.handleTimeChange(e)}
+                    handleVolumeChange={e => this.handleVolumeChange(e)}
+                    formatTime={() => this.formatTime()}
+                  />
+                  Now playing: {this.state.currentSong.title}
+                </div>
+              </div>
+              <div className="song-info">
+                <h1 id="album-title">{this.state.album.title}</h1>
+                <h3 className="artist">{this.state.album.artist}</h3>
+                <table
+                  id="song-list"
+                  className="table table-striped table-hover rounded"
+                >
+                  <colgroup>
+                    <col id="song-number-column" />
+                    <col id="song-title-column" />
+                    <col id="song-duration-column" />
+                  </colgroup>
+                  <tbody>
+                    {this.state.album.songs.map((song, index) => (
+                      <tr
+                        className="song "
+                        key={index}
+                        onMouseOver={() => this.whenOver(index)}
+                        onMouseOut={() => this.whenOut()}
+                        onClick={() => this.handleSongClick(song)}
+                      >
+                        <td className="song-number ">
+                          {this.state.currentSong.title === song.title ? (
+                            <span
+                              className={
+                                this.state.isPlaying ? "ion-pause" : "ion-play"
+                              }
+                            />
+                          ) : this.state.onHover === index + 1 ? (
+                            <span className="ion-play" />
+                          ) : (
+                            <span className="song-number">{index + 1}</span>
+                          )}
+                        </td>
+                        <td className="song-title ">{song.title}</td>
+                        <td className="song-duration ">
+                          {this.formatSongDuration(song.duration)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </section>
-        <i className="fas fa-camera-retro" />
-        <table
-          id="song-list"
-          className="table table-striped table-bordered table-hover rounded"
-        >
-          <colgroup>
-            <col id="song-number-column" />
-            <col id="song-title-column" />
-            <col id="song-duration-column" />
-          </colgroup>
-          <tbody>
-            {this.state.album.songs.map((song, index) => (
-              <tr
-                className="song "
-                key={index}
-                onMouseOver={() => this.whenOver(index)}
-                onMouseOut={() => this.whenOut()}
-                onClick={() => this.handleSongClick(song)}
-              >
-                <td className="song-number ">
-                  {this.state.currentSong.title === song.title ? (
-                    <span
-                      className={
-                        this.state.isPlaying ? "ion-pause" : "ion-play"
-                      }
-                    />
-                  ) : this.state.onHover === index + 1 ? (
-                    <span className="ion-play" />
-                  ) : (
-                    <span className="song-number">{index + 1}</span>
-                  )}
-                </td>
-                <td className="song-title ">{song.title}</td>
-                <td className="song-duration ">
-                  {this.formatSongDuration(song.duration)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <PlayerBar
-          isPlaying={this.state.isPlaying}
-          currentSong={this.state.currentSong}
-          currentTime={this.audioElement.currentTime}
-          duration={this.audioElement.duration}
-          currentVolume={this.audioElement.currentVolume}
-          handleSongClick={() => this.handleSongClick(this.state.currentSong)}
-          handlePrevClick={() => this.handlePrevClick()}
-          handleNextClick={() => this.handleNextClick()}
-          handleTimeChange={e => this.handleTimeChange(e)}
-          handleVolumeChange={e => this.handleVolumeChange(e)}
-          formatTime={() => this.formatTime()}
-        />
       </section>
     );
   }

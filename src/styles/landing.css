@@ -1,0 +1,63 @@
+.jumbotron {
+  background-size: cover;
+  color: #fff;
+  padding: 70px 75px;
+  background-image: url("../img/screen.jpg");
+  background-repeat: no-repeat;
+  font-family: Quicksand;
+  background: contain;
+  margin-bottom: 75px;
+}
+
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: 400;
+}
+.marketing .col-lg-4 p {
+  margin-right: 0.75rem;
+  margin-left: 0.75rem;
+}
+
+.featurette-divider {
+  margin: 3rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  max-width: 960px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.marketing-img {
+  width: 140px;
+  height: 140px;
+}
+
+.music-button {
+  margin-top: 15px;
+}
